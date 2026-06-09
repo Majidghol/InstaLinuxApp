@@ -1,0 +1,2 @@
+rootProject.name = "InstaLinuxApp"
+include ':app'

@@ -1,0 +1,7 @@
+com.insta.linuxapp-pngs-0 /data/data/com.termux/files/home/InstaLinuxApp/app/build/generated/res/pngs/debug
+com.insta.linuxapp-resValues-1 /data/data/com.termux/files/home/InstaLinuxApp/app/build/generated/res/resValues/debug
+com.insta.linuxapp-packageDebugResources-2 /data/data/com.termux/files/home/InstaLinuxApp/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.insta.linuxapp-packageDebugResources-3 /data/data/com.termux/files/home/InstaLinuxApp/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.insta.linuxapp-debug-4 /data/data/com.termux/files/home/InstaLinuxApp/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.insta.linuxapp-debug-5 /data/data/com.termux/files/home/InstaLinuxApp/app/src/debug/res
+com.insta.linuxapp-main-6 /data/data/com.termux/files/home/InstaLinuxApp/app/src/main/res
