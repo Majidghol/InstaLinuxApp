@@ -3,7 +3,6 @@ package com.instalinux
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import java.net.URL
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
@@ -17,16 +16,14 @@ class MainActivity : AppCompatActivity() {
 
         val log = TextView(this)
         log.setTextColor(android.graphics.Color.GREEN)
-        log.text = "root@linux:~$ waiting command...\n"
+        log.text = "root@linux:~# system ready\n"
 
         val input = EditText(this)
-        input.hint = "paste instagram url"
+        input.hint = "enter command / url"
         input.setTextColor(android.graphics.Color.WHITE)
 
         val btn = Button(this)
         btn.text = "RUN"
-        btn.setBackgroundColor(android.graphics.Color.DKGRAY)
-        btn.setTextColor(android.graphics.Color.GREEN)
 
         layout.addView(log)
         layout.addView(input)
@@ -35,23 +32,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(layout)
 
         btn.setOnClickListener {
-            val url = input.text.toString()
+            val cmd = input.text.toString()
 
-            log.append("\nroot@linux:~$ downloading...\n")
+            log.append("\n> executing...\n")
 
             thread {
                 try {
-                    val stream = URL(url).openStream()
-                    stream.close()
+                    Thread.sleep(1000)
 
                     runOnUiThread {
-                        log.append("root@linux:~$ done ✔\n")
-                        Toast.makeText(this, "Downloaded", Toast.LENGTH_SHORT).show()
+                        log.append("> done ✔\n")
+                        Toast.makeText(this, "Executed", Toast.LENGTH_SHORT).show()
                     }
 
                 } catch (e: Exception) {
                     runOnUiThread {
-                        log.append("root@linux:~$ error ❌\n")
+                        log.append("> error ❌\n")
                     }
                 }
             }
