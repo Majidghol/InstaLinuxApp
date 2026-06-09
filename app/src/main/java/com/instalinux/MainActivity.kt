@@ -2,52 +2,66 @@ package com.instalinux
 
 import android.os.Bundle
 import android.widget.*
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.concurrent.thread
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val layout = LinearLayout(this)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.setBackgroundColor(android.graphics.Color.BLACK)
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setBackgroundColor(Color.BLACK)
+            setPadding(30,30,30,30)
+        }
 
-        val log = TextView(this)
-        log.setTextColor(android.graphics.Color.GREEN)
-        log.text = "root@linux:~# system ready\n"
+        val log = TextView(this).apply {
+            setTextColor(Color.GREEN)
+            text = "root@linux:~$ system ready\n"
+        }
 
-        val input = EditText(this)
-        input.hint = "enter command / url"
-        input.setTextColor(android.graphics.Color.WHITE)
+        val input = EditText(this).apply {
+            hint = "enter url"
+            setTextColor(Color.WHITE)
+        }
 
-        val btn = Button(this)
-        btn.text = "RUN"
+        val btn = Button(this).apply {
+            text = "RUN"
+        }
+
+        val progress = ProgressBar(this).apply {
+            visibility = ProgressBar.GONE
+        }
 
         layout.addView(log)
         layout.addView(input)
         layout.addView(btn)
+        layout.addView(progress)
 
         setContentView(layout)
 
         btn.setOnClickListener {
-            val cmd = input.text.toString()
+            val url = input.text.toString()
 
-            log.append("\n> executing...\n")
+            log.append("\nconnecting...\n")
+            progress.visibility = ProgressBar.VISIBLE
 
             thread {
                 try {
-                    Thread.sleep(1000)
+                    URL(url).openStream().close()
 
                     runOnUiThread {
-                        log.append("> done ✔\n")
-                        Toast.makeText(this, "Executed", Toast.LENGTH_SHORT).show()
+                        progress.visibility = ProgressBar.GONE
+                        log.append("DONE ✔\n")
                     }
 
                 } catch (e: Exception) {
                     runOnUiThread {
-                        log.append("> error ❌\n")
+                        progress.visibility = ProgressBar.GONE
+                        log.append("ERROR ❌\n")
                     }
                 }
             }
